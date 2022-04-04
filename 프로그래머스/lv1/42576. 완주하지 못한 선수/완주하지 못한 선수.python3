@@ -1,0 +1,18 @@
+def solution(participant, completion):
+    par = {}
+    for p in participant:
+        if p in par:
+            par[p] += 1
+        else:
+            par[p] = 1
+            
+    com = {}
+    for c in completion:
+        if c in com:
+            com[c] += 1
+        else:
+            com[c] = 1
+    
+    for (key, value) in par.items():
+        if key not in com or com[key] != value:
+            return key
