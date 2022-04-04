@@ -1,0 +1,13 @@
+def solution(phone_book):
+    hash_map = {}
+    
+    for phone in phone_book:
+        hash_map[phone] = 1
+    
+    for phone in phone_book:
+        temp = ""
+        for p in phone:
+            temp += p
+            if temp in hash_map and temp != phone:
+                return False
+    return True
