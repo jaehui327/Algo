@@ -4,16 +4,10 @@ let line = readLine()!.split(separator: " ").map { Int(String($0))!}
 let arr = readLine()!.split(separator: " ").map { Int(String($0))!}
 
 func smallX(_ arr: [Int],_ n: Int, _ x: Int) {
-    var result: [Int] = []
-    
     for num in arr {
         if num < x {
-            result.append(num)
+            print(num, terminator: " ")
         }
-    }
-    
-    for i in result {
-        print(i, terminator: " ")
     }
 }
 
