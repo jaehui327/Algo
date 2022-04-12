@@ -2,17 +2,13 @@ import Foundation
 
 let s = readLine()!
 
-var dic: [Character: Int] = [:]
-let alphabet: [Character] = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-
-for a in alphabet {
-    dic[a] = 0
-}
+let alphabet = Array("abcdefghijklmnopqrstuvwxyz")
+var count = [Int](repeating: 0, count: 26)
 
 for c in s {
-    dic[c]! += 1
+    count[alphabet.firstIndex(of: c)!] += 1
 }
 
-for a in alphabet {
-    print(dic[a]!, terminator: " ")
+for c in count {
+    print(c, terminator: " ")
 }
