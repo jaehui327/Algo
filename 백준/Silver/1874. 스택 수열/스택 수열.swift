@@ -1,25 +1,22 @@
 import Foundation
 
 var stack = [Int]()
-var result = [String]()
-
 var count = 1
+var result = ""
 
 for _ in 0..<Int(readLine()!)! {
     let num = Int(readLine()!)!
     
     while count <= num {
         stack.append(count)
-        result.append("+")
+        result += "+\n"
         count += 1
     }
-    if stack.last == num {
-        stack.removeLast()
-        result.append("-")
-    } else {
-        print("NO")
-        exit(0)
+    if stack.removeLast() != num {
+        result = "NO"
+        break
     }
+    result += "-\n"
 }
 
-print(result.joined(separator: "\n"))
+print(result)
