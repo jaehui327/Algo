@@ -1,0 +1,4 @@
+def solution(numbers):
+	strList = [str(x) for x in numbers]
+	strList.sort(key=lambda x : (x * 4)[:4], reverse=True)
+	return str(int(''.join(strList)))
