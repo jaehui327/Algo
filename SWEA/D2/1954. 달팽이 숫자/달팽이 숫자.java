@@ -23,15 +23,13 @@ public class Solution {
 			int x=0;
 			int y=0;
 			board[x][y] = num++;
-			visited[x][y] = 1;
 			
 			while(true) {
 				if(num>N*N) break;
 				int nx = x + dir[d][0];
 				int ny = y + dir[d][1];
-				if(nx>=0 && nx<N && ny>=0 && ny<N && visited[nx][ny]==0) {
+				if(nx>=0 && nx<N && ny>=0 && ny<N && board[nx][ny]==0) {
 					board[nx][ny] = num++;
-					visited[nx][ny] = 1;
 					x = nx;
 					y = ny;
 				} else {
@@ -39,8 +37,6 @@ public class Solution {
 					x += dir[d][0];
 					y += dir[d][1];
 					board[x][y] = num++;
-					visited[x][y] = 1;
-					
 				}
 			}
 			
