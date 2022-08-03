@@ -21,7 +21,9 @@ public class Solution {
 					board[i][j] = s.charAt(j)-'0';
 				}
 			}
-			int sum = 0;
+			
+            /*
+            int sum = 0;
 			int width = 1;
 			int start = N/2;
 			for(int i=0; i<N; i++) {
@@ -37,7 +39,18 @@ public class Solution {
 					start++;
 				}
 			}
-
+			*/
+            
+            int sum = 0;
+			int half = N/2;
+			for(int r=0;r<N;r++) {
+		    	for(int c=0;c<N;c++) {
+		    		if(Math.abs(half-r) + Math.abs(half-c) <= half) {
+		    			sum += board[r][c];
+		    		}
+		    	}
+		    	
+		    }
 			sb.append("#");
 			sb.append(t);
 			sb.append(" ");
