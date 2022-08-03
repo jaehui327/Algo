@@ -1,39 +1,50 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
-class Solution
-{
-	public static void main(String args[]) throws Exception
-	{
-		Scanner sc = new Scanner(System.in);
-		int T;
-		T=sc.nextInt();
+// 2001. 파리퇴치
+// https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV5PzOCKAigDFAUq
+public class Solution {
+	
+	public static void main(String[] args) throws Exception {
+//		System.setIn(new FileInputStream("input/2001.txt"));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
 
-		for(int test_case = 1; test_case <= T; test_case++)
-		{
-            int N = sc.nextInt();
-			int M = sc.nextInt();
+		int T = Integer.parseInt(br.readLine());
+		for (int t = 1; t <= T; t++) {
+			StringTokenizer input = new StringTokenizer(br.readLine(), " ");
+			int N = Integer.parseInt(input.nextToken());
+			int M = Integer.parseInt(input.nextToken());
 			
-			int[][] board = new int[N][N];
-			for(int i = 0; i < N; i++) {
-				for(int j = 0; j < N; j++) {
-					board[i][j] = sc.nextInt();
+			int[][] dp = new int[N+1][N+1];
+			
+			for(int i=1; i<=N; i++) {
+				StringTokenizer b = new StringTokenizer(br.readLine());
+				for(int j=1; j<=N; j++) {
+					dp[i][j] =  Integer.parseInt(b.nextToken()) + dp[i-1][j] + dp[i][j-1] - dp[i-1][j-1];
 				}
 			}
 			
-			int answer = 0;
-			for(int i = 0; i < N - M + 1; i++) {
-				for(int j = 0; j < N - M + 1; j++) {
-					int temp = 0;
-					for(int a = 0; a < M; a++) {
-						for(int b = 0; b < M; b++) {
-							temp += board[i + a][j + b];
-						}
-					}
-					answer = Math.max(answer, temp);
+			int temp = 0;
+			int max = 0;
+			for(int i=M; i<=N; i++) {
+				for(int j=M; j<=N; j++) {
+					temp = dp[i][j] - dp[i-M][j] - dp[i][j-M] + dp[i-M][j-M];
+					max = Math.max(max, temp);
 				}
 			}
-			
-			System.out.println("#"+test_case+" "+answer);
+
+			sb.append("#");
+			sb.append(t);
+			sb.append(" ");
+			sb.append(max);
+			sb.append("\n");
 		}
+		
+		br.close();
+		System.out.println(sb);
 	}
+
 }
