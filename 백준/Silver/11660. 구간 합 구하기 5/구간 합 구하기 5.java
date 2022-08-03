@@ -15,19 +15,12 @@ public class Main {
 		int N = Integer.parseInt(input.nextToken());
 		int M = Integer.parseInt(input.nextToken());
 		
-		int[][] board = new int[N+1][N+1];
 		int[][] dp = new int[N+1][N+1];
 		
 		for(int i=1; i<=N; i++) {
 			StringTokenizer b = new StringTokenizer(br.readLine());
 			for(int j=1; j<=N; j++) {
-				board[i][j] = Integer.parseInt(b.nextToken());
-				dp[i][j] += dp[i][j-1] + board[i][j];
-			}
-		}
-		for(int i=1; i<=N; i++) {
-			for(int j=2; j<=N; j++) {
-				dp[j][i] += dp[j-1][i];
+				dp[i][j] =  Integer.parseInt(b.nextToken()) + dp[i-1][j] + dp[i][j-1] - dp[i-1][j-1];
 			}
 		}
 		
