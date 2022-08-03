@@ -20,10 +20,7 @@ public class Main {
 		StringTokenizer b = new StringTokenizer(br.readLine(), " ");
 		for (int i = 1; i <= N; i++) {
 			board[i] = Integer.parseInt(b.nextToken());
-		}
-
-		for (int i = 1; i <= N; i++) {
-			dp[i] += dp[i - 1] + board[i];
+            dp[i] += dp[i - 1] + board[i];
 		}
 
 		for (int k = 0; k < M; k++) {
