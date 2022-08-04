@@ -13,17 +13,17 @@ public class Main {
 
 		int N = Integer.parseInt(br.readLine());
 		Queue<Integer> queue = new LinkedList<Integer>();
-		for (int i = 1; i <= N; i++) queue.add(i);
+		for (int i = 1; i <= N; i++) queue.offer(i);
 		
 		while(true) {
-            if(queue.size() == 1) break;
-			queue.remove();
 			if(queue.size() == 1) break;
-			queue.add(queue.remove());
+			queue.poll();
+			if(queue.size() == 1) break;
+			queue.offer(queue.poll());
 		}
 
 		br.close();
-		System.out.println(queue.remove());
+		System.out.println(queue.poll());
 	}
 
 }
