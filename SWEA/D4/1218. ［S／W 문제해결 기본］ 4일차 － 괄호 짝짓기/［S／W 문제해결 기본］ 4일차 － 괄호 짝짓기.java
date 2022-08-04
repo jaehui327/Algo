@@ -18,7 +18,7 @@ public class Solution {
 		for(int i=0; i<N; i++) {
 			if(map.containsKey(bracket[i])) stack.push(bracket[i]);
 			else {
-				if(bracket[i] == map.get(stack.peek())) stack.pop();
+				if(!stack.isEmpty() && bracket[i] == map.get(stack.peek())) stack.pop();
 				else return 0;
 			}
 		}
