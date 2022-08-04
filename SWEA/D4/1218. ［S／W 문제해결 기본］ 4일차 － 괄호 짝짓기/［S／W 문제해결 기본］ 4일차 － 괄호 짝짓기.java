@@ -22,7 +22,8 @@ public class Solution {
 				else return 0;
 			}
 		}
-		return 1;
+		if(stack.isEmpty()) return 1;
+		else return 0;
 	}
 
 	public static void main(String[] args) throws Exception {
