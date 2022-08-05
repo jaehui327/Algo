@@ -14,12 +14,12 @@ public class Main {
 	static int[] count = new int[4];
 	static char[] dna = { 'A', 'C', 'G', 'T' };
 
-	private static int password(int P) {
+	private static int password(int P, int N) {
 		int result = 0;
 		int windowStart = 0;
 		
 
-		for (int i = 0; i < s.length; i++) {
+		for (int i = 0; i < N; i++) {
 			upCount(s[i]);
 
 			if (i >= P - 1) {
@@ -74,7 +74,7 @@ public class Main {
 			appear[i] = Integer.parseInt(st2.nextToken());
 
 		br.close();
-		System.out.println(password(P));
+		System.out.println(password(P, N));
 	}
 
 }
