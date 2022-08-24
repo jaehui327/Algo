@@ -1,9 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
@@ -25,20 +23,10 @@ public class Main {
 	static int[] dx = { 1, 0, -1, 0 }, dy = { 0, -1, 0, 1 };
 	static char[][] board;
 	static boolean[][] visited, isWater;
-
-	private static int bfs(Position s, List<Position> water) {
+	static Queue<Position> queue, wq;
+	
+	private static int bfs() {
 		int result = 0;
-		Queue<Position> queue = new LinkedList<Position>();
-		visited = new boolean[R][C];
-		Queue<Position> wq = new LinkedList<Position>();
-		isWater = new boolean[R][C];
-		
-		queue.offer(s);
-		visited[s.y][s.x] = true;
-		
-		for (int i = 0; i < water.size(); i++) {
-			wq.offer(new Position(water.get(i).x, water.get(i).y));
-		}
 		
 		while (!queue.isEmpty()) {
 			result++;
@@ -86,18 +74,26 @@ public class Main {
 		C = Integer.parseInt(st.nextToken());
 		board = new char[R][C];
 		
-		List<Position> water = new ArrayList<Position>();
-		Position s = null;
+		visited = new boolean[R][C];
+		isWater = new boolean[R][C];
+		queue = new LinkedList<Position>();
+		wq = new LinkedList<Position>();
 		
 		for (int i = 0; i < R; i++) {
 			board[i] = br.readLine().toCharArray();
 			for (int j = 0; j < C; j++) {
-				if (board[i][j] == 'S') s = new Position(j, i);
-				else if (board[i][j] == '*') water.add(new Position(j, i));
+				if (board[i][j] == 'S') {
+					queue.offer(new Position(j, i));
+					visited[i][j] = true;
+				}
+				else if (board[i][j] == '*') {
+					wq.offer(new Position(j, i));
+					isWater[i][j] = true;
+				}
 			}
 		}
 		
-		int answer = bfs(s, water);
+		int answer = bfs();
 		if (answer == -1) sb.append("KAKTUS");
 		else sb.append(answer);
 
