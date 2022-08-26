@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -28,23 +29,24 @@ public class Main {
 	static Map<Integer, List<Edge>> map;
 	
 	private static void dijkstra(int start) {
-		PriorityQueue<Edge> queue = new PriorityQueue<Edge>((x, y) -> x.weight - y.weight);
+		PriorityQueue<Edge> pq = new PriorityQueue<Edge>((x, y) -> x.weight - y.weight);
 		dp = new int[V + 1];
 		Arrays.fill(dp, Integer.MAX_VALUE);
 		
-		queue.add(new Edge(start, 0));
+		pq.add(new Edge(start, 0));
 		dp[start] = 0;
 		
-		while (!queue.isEmpty()) {
-			Edge e = queue.poll();
+		while (!pq.isEmpty()) {
+			Edge e = pq.poll();
 			if (dp[e.vertex] < e.weight) continue;
 			
 			List<Edge> edges = map.get(e.vertex);
-			for (int i = 0; i < edges.size(); i++) {
-				Edge ne = edges.get(i);
-				if (dp[ne.vertex] < dp[e.vertex] + ne.weight) continue;
-				dp[ne.vertex] = dp[e.vertex] + ne.weight;
-				queue.add(new Edge(ne.vertex, dp[e.vertex] + ne.weight));
+			for (Edge ne : edges) {
+				int nw = e.weight + ne.weight;
+				if (dp[ne.vertex] > nw) {
+					dp[ne.vertex] = nw;
+					pq.add(new Edge(ne.vertex, nw));
+				}
 			}
 		}
 	}
