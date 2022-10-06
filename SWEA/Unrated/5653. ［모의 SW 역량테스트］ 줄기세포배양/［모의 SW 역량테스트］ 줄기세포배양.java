@@ -61,7 +61,7 @@ public class Solution {
 			for (int d = 0; d < 4; d++) {
 				int nr = cur.r + dr[d];
 				int nc = cur.c + dc[d];
-				if (!visited[nr][nc]) {
+				if (!visited[nr][nc] && board[nr][nc] < cur.x) {
 					board[nr][nc] = cur.x;
 					queue.offer(new Cell(nr, nc, cur.x, cur.x));
 				}
@@ -69,13 +69,6 @@ public class Solution {
 		}
 		
 		size = queue.size();
-		for (int i = 0; i < size; i++) {
-			Cell cell = queue.poll();
-			if (!visited[cell.r][cell.c] && board[cell.r][cell.c] < cell.x)
-				board[cell.r][cell.c] = cell.x;
-			queue.offer(cell);
-		}
-		
 		for (int i = 0; i < size; i++) {
 			Cell cell = queue.poll();
 			if (!visited[cell.r][cell.c] && board[cell.r][cell.c] == cell.x) {
