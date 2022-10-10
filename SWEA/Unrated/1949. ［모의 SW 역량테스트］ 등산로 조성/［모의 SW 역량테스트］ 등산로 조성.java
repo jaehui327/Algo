@@ -18,7 +18,7 @@ public class Solution {
 		}
 	}
 
-	static int N, K, maxHeight, answer, cnt;
+	static int N, K, maxHeight, answer;
 	static int[] dx = { 1, 0, -1 ,0 }, dy = { 0, -1, 0, 1 };
 	static int[][] board;
 	static boolean[][] visited;
@@ -28,27 +28,24 @@ public class Solution {
 		int height = board[y][x];
 		board[y][x] -= k;
 		for (int i = 0; i < peaks.size(); i++) {
-			cnt = 0;
 			visited = new boolean[N][N];
-			dfs(peaks.get(i).x, peaks.get(i).y, visited);
+			dfs(peaks.get(i).x, peaks.get(i).y, 1);
 		}
 		board[y][x] = height;
 	}
 	
-	private static void dfs(int x, int y, boolean[][] visited) {
-		visited[y][x] = true;
-		cnt += 1;
+	private static void dfs(int x, int y, int cnt) {
 		answer = Math.max(answer, cnt);
-		int nx, ny;
+		visited[y][x] = true;
+		
 		for (int d = 0; d < 4; d++) {
-			nx = x + dx[d];
-			ny = y + dy[d];
+			int nx = x + dx[d];
+			int ny = y + dy[d];
 			if (nx < 0 || nx >= N || ny < 0 || ny >= N) continue;
 			if (visited[ny][nx] || board[ny][nx] >= board[y][x]) continue;
-			dfs(nx, ny, visited);
+			dfs(nx, ny, cnt + 1);
 		}
 		visited[y][x] = false;
-		cnt -= 1;
 	}
 	
 	public static void main(String[] args) throws IOException {
@@ -95,5 +92,4 @@ public class Solution {
 		br.close();
 		System.out.println(sb.toString());
 	}
-
 }
