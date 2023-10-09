@@ -6,8 +6,13 @@ public class Main {
     static int N, M, x, y;
     static int[][] map;
     static int[] dice;
-    static int[] dx = { 1, -1, 0, 0 }, dy = { 0, 0, -1, 1 };
-    static int[][] dd = { { 1, 5, 0, 3, 4, 2 }, { 2, 0, 5, 3, 4, 1 }, { 4, 1, 2, 0, 5, 3 }, { 3, 1, 2, 5, 0, 4 } };
+    static int[] dx = { 1, -1, 0, 0 }, dy = { 0, 0, -1, 1 }; // 동 서 북 남
+    static int[][] dd = { 
+            // 바닥 동 서 남 북 위
+            { 1, 5, 0, 3, 4, 2 }, // 동
+            { 2, 0, 5, 3, 4, 1 }, // 서
+            { 4, 1, 2, 0, 5, 3 }, // 북
+            { 3, 1, 2, 5, 0, 4 } }; // 남
 
 
     static int moveDice(int command) {
@@ -32,10 +37,10 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         StringBuilder sb = new StringBuilder();
-        N = Integer.parseInt(st.nextToken());
-        M = Integer.parseInt(st.nextToken());
-        y = Integer.parseInt(st.nextToken());
-        x = Integer.parseInt(st.nextToken());
+        N = Integer.parseInt(st.nextToken()); // 가로
+        M = Integer.parseInt(st.nextToken()); // 세로
+        y = Integer.parseInt(st.nextToken()); // 북에서 떨어진 위치
+        x = Integer.parseInt(st.nextToken()); // 서에서 떨어진 위치
         int K = Integer.parseInt(st.nextToken());
 
         dice = new int[6];
