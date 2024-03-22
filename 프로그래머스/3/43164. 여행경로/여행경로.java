@@ -34,14 +34,14 @@ class Solution {
         
         while(!stack.isEmpty()) {
             String cur = stack.peek();
-            if (!map.containsKey(cur) || map.get(cur).isEmpty()) {
-                route.add(stack.pop());
+            if (!map.containsKey(cur) || map.get(cur).isEmpty()) { // 티켓 다 소진한 경우
+                route.add(stack.pop()); // 경로 저장
             } else {
-                stack.push(map.get(cur).remove(0));
+                stack.push(map.get(cur).remove(0)); // 알파벳 순서가 앞서는 티켓 먼저 소진
             }
         }
         
-        Collections.reverse(route);
+        Collections.reverse(route); // 역순 정렬
         return route.toArray(new String[route.size()]);
     }
 }
